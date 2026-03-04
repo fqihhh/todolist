@@ -7,15 +7,29 @@ const todoListSlice = createSlice({
   initialState: [],
   reducers: {
     addTodo: (state, action) => {
-      state.push({ id: nextId++, name: action.payload.name });
+      const { name, className, region } = action.payload;
+
+      state.push({
+        id: nextId++,
+        name,
+        class: className,
+        region
+      });
     },
+
     removeTodo: (state, action) => {
       return state.filter(todo => todo.id !== action.payload.id);
     },
+
     updateTodo: (state, action) => {
-      const { id, name } = action.payload;
+      const { id, name, className, region } = action.payload;
       const todo = state.find(todo => todo.id === id);
-      if (todo) todo.name = name;
+
+      if (todo) {
+        todo.name = name;
+        todo.class = className;
+        todo.region = region;
+      }
     }
   }
 });

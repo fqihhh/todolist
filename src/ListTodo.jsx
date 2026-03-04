@@ -23,6 +23,8 @@ export default function ListTodo() {
           <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Class</th>
+            <th>Region</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -30,13 +32,15 @@ export default function ListTodo() {
         <tbody>
           {todos.length === 0 ? (
             <tr>
-              <td colSpan="3">No todos available</td>
+              <td colSpan="5">No todos available</td>
             </tr>
           ) : (
             todos.map((todo) => (
               <tr key={todo.id}>
                 <td>{todo.id}</td>
                 <td>{todo.name}</td>
+                <td>{todo.class}</td>
+                <td>{todo.region}</td>
                 <td>
                   <Link to={`/todolist/${todo.id}/edit`}>
                     Update

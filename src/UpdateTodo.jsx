@@ -13,18 +13,27 @@ export default function UpdateTodo() {
   );
 
   const [name, setName] = useState("");
+  const [className, setClassName] = useState("");
+  const [region, setRegion] = useState("");
 
-  // Isi input setelah todo ditemukan
   useEffect(() => {
     if (todo) {
       setName(todo.name);
+      setClassName(todo.class);
+      setRegion(todo.region);
     }
   }, [todo]);
 
   const handleUpdateTodo = () => {
-    if (!name.trim()) return;
+    if (!name.trim() || !className.trim() || !region.trim()) return;
 
-    dispatch(updateTodo({ id: Number(id), name }));
+    dispatch(updateTodo({
+      id: Number(id),
+      name,
+      className,
+      region
+    }));
+
     navigate("/todolist");
   };
 
@@ -39,8 +48,22 @@ export default function UpdateTodo() {
       <input
         type="text"
         value={name}
-        placeholder="Enter todo name"
+        placeholder="Enter name"
         onChange={(e) => setName(e.target.value)}
+      />
+
+      <input
+        type="text"
+        value={className}
+        placeholder="Enter class"
+        onChange={(e) => setClassName(e.target.value)}
+      />
+
+      <input
+        type="text"
+        value={region}
+        placeholder="Enter region"
+        onChange={(e) => setRegion(e.target.value)}
       />
 
       <button onClick={handleUpdateTodo}>
